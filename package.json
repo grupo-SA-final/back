@@ -1,0 +1,26 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "**CashFlow** é um sistema desenvolvido para ajudar os usuários a controlar suas finanças de forma simplificada e ágil. O sistema permite o registro de despesas e receitas, categorização de transações, visualização de relatórios e gráficos para facilitar o acompanhamento financeiro, contribuindo para uma gestão mais eficiente do orçamento pessoal ou familiar.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grupo-SA-final/back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/grupo-SA-final/back/issues"
+  },
+  "homepage": "https://github.com/grupo-SA-final/back#readme",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
