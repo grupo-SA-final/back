@@ -14,6 +14,14 @@ const Receita = sequelize.define('Receita', {
   descricao: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  usuarioId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'usuarios',
+      key: 'id'
+    }
   }
 }, {
   tableName: 'receitas',

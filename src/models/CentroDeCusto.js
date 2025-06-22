@@ -14,6 +14,14 @@ const CentroDeCusto = sequelize.define('CentroDeCusto', {
   descricao: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  usuarioId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'usuarios',
+      key: 'id'
+    }
   }
 }, {
   tableName: 'centros_de_custo',

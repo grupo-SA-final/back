@@ -46,6 +46,14 @@ const Lancamento = sequelize.define('Lancamento', {
       model: 'centros_de_custo',
       key: 'id'
     }
+  },
+  usuarioId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'usuarios',
+      key: 'id'
+    }
   }
 }, {
   tableName: 'lancamentos',

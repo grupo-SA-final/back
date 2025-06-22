@@ -26,6 +26,14 @@ const ContaBancaria = sequelize.define('ContaBancaria', {
   descricao: {
     type: DataTypes.TEXT,
     allowNull: true
+  },
+  usuarioId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'usuarios',
+      key: 'id'
+    }
   }
 }, {
   tableName: 'contas_bancarias',

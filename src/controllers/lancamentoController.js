@@ -5,6 +5,7 @@ const lancamentoController = {
   async index(req, res) {
     try {
       const lancamentos = await Lancamento.findAll({
+        where: { usuarioId: req.user.id },
         include: [
           {
             model: ContaBancaria,
@@ -42,7 +43,8 @@ const lancamentoController = {
     try {
       const { id } = req.params;
       
-      const lancamento = await Lancamento.findByPk(id, {
+      const lancamento = await Lancamento.findOne({
+        where: { id, usuarioId: req.user.id },
         include: [
           {
             model: ContaBancaria,
@@ -143,7 +145,8 @@ const lancamentoController = {
         descricao,
         contaBancariaId,
         receitaId,
-        centroDeCustoId
+        centroDeCustoId,
+        usuarioId: req.user.id
       });
 
       const lancamentoCriado = await Lancamento.findByPk(lancamento.id, {
@@ -193,7 +196,7 @@ const lancamentoController = {
       const { id } = req.params;
       const { tipo, data, valor, descricao, contaBancariaId, receitaId, centroDeCustoId } = req.body;
 
-      const lancamento = await Lancamento.findByPk(id);
+      const lancamento = await Lancamento.findOne({ where: { id, usuarioId: req.user.id } });
       
       if (!lancamento) {
         return res.status(404).json({ 
@@ -289,30 +292,16 @@ const lancamentoController = {
   },
 
   async destroy(req, res) {
+    const { id } = req.params;
     try {
-      const { id } = req.params;
-
-      const lancamento = await Lancamento.findByPk(id);
-      
+      const lancamento = await Lancamento.findOne({ where: { id, usuarioId: req.user.id } });
       if (!lancamento) {
-        return res.status(404).json({ 
-          success: false, 
-          message: 'Lançamento não encontrado' 
-        });
+        return res.status(404).json({ success: false, message: 'Lançamento não encontrado' });
       }
-
       await lancamento.destroy();
-
-      res.json({
-        success: true,
-        message: 'Lançamento deletado com sucesso'
-      });
-    } catch (error) {
-      console.error('Erro ao deletar lançamento:', error);
-      res.status(500).json({ 
-        success: false, 
-        message: 'Erro interno do servidor' 
-      });
+      res.json({ success: true, message: 'Lançamento deletado com sucesso' });
+    } catch (err) {
+      res.status(400).json({ success: false, message: err.message });
     }
   }
 };
