@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest testes",
+    "test:unit": "jest testes --runInBand",
+    "test:gherkin": "cucumber-js testes/*.feature"
   },
   "keywords": ["nodejs", "express", "sequelize", "mysql", "jwt", "axios"],
   "author": "",

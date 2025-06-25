@@ -8,8 +8,11 @@ const router = express.Router();
 router.use(authMiddleware);
 
 const centroDeCustoValidation = [
-  body('nome').notEmpty().withMessage('Nome é obrigatório'),
-  body('descricao').optional()
+  body('nome')
+    .notEmpty().withMessage('Nome é obrigatório')
+    .isLength({ min: 3, max: 100 }).withMessage('Nome deve ter entre 3 e 100 caracteres'),
+  body('descricao')
+    .optional().isLength({ max: 255 }).withMessage('Descrição deve ter no máximo 255 caracteres')
 ];
 
 router.get('/', centroDeCustoController.index);
