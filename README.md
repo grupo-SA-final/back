@@ -264,3 +264,93 @@ Para dúvidas ou problemas, abra uma issue no repositório.
 ---
 
 **Desenvolvido com ❤️ para controle financeiro eficiente!**
+
+# Regras de Negócio do Sistema
+
+## Usuário
+- Cadastro de usuário exige nome, email único, senha, telefone, documento (CPF único e válido) e data de nascimento.
+- Senha é armazenada de forma criptografada.
+- Login exige email e senha válidos.
+- Usuário pode atualizar seus dados (exceto senha/documento diretamente).
+- Usuário pode alterar sua senha informando a senha atual.
+- Usuário pode ser deletado.
+
+## Conta Bancária
+- Cada usuário pode cadastrar múltiplas contas bancárias.
+- Conta bancária exige nome do banco, tipo (corrente, poupança, investimento), agência, número da conta e vínculo ao usuário.
+- Conta bancária pode ser atualizada ou deletada apenas pelo dono.
+
+## Centro de Custo
+- Cada usuário pode cadastrar múltiplos centros de custo.
+- Centro de custo exige nome e vínculo ao usuário.
+- Centro de custo pode ser atualizado ou deletado apenas pelo dono.
+
+## Receita
+- Cada usuário pode cadastrar múltiplas receitas.
+- Receita exige nome e vínculo ao usuário.
+- Receita pode ser atualizada ou deletada apenas pelo dono.
+
+## Lançamento
+- Lançamento pode ser de tipo 'pagamento' ou 'recebimento'.
+- Lançamento exige data, valor, conta bancária e vínculo ao usuário.
+- Lançamento do tipo 'recebimento' exige vínculo a uma receita.
+- Lançamento do tipo 'pagamento' exige vínculo a um centro de custo.
+- Lançamento pode ser atualizado ou deletado apenas pelo dono.
+- Não é possível criar lançamento para conta bancária, receita ou centro de custo inexistentes.
+
+# Cenários de Teste por Regra de Negócio
+
+## Usuário
+- Cadastro com dados válidos
+- Cadastro com email já existente
+- Cadastro com CPF inválido
+- Cadastro com campos obrigatórios ausentes
+- Login com credenciais válidas
+- Login com senha incorreta
+- Login com email não cadastrado
+- Atualização de dados do usuário
+- Alteração de senha com senha atual correta
+- Alteração de senha com senha atual incorreta
+- Exclusão de usuário existente
+- Exclusão de usuário inexistente
+
+## Conta Bancária
+- Cadastro de conta bancária com dados válidos
+- Cadastro de conta bancária com campos obrigatórios ausentes
+- Atualização de conta bancária existente
+- Atualização de conta bancária inexistente
+- Exclusão de conta bancária existente
+- Exclusão de conta bancária inexistente
+- Listagem de contas bancárias do usuário
+
+## Centro de Custo
+- Cadastro de centro de custo com dados válidos
+- Cadastro de centro de custo com campos obrigatórios ausentes
+- Atualização de centro de custo existente
+- Atualização de centro de custo inexistente
+- Exclusão de centro de custo existente
+- Exclusão de centro de custo inexistente
+- Listagem de centros de custo do usuário
+
+## Receita
+- Cadastro de receita com dados válidos
+- Cadastro de receita com campos obrigatórios ausentes
+- Atualização de receita existente
+- Atualização de receita inexistente
+- Exclusão de receita existente
+- Exclusão de receita inexistente
+- Listagem de receitas do usuário
+
+## Lançamento
+- Cadastro de lançamento de recebimento com receita existente
+- Cadastro de lançamento de pagamento com centro de custo existente
+- Cadastro de lançamento com conta bancária inexistente
+- Cadastro de lançamento de recebimento sem receita
+- Cadastro de lançamento de pagamento sem centro de custo
+- Atualização de lançamento existente
+- Atualização de lançamento inexistente
+- Exclusão de lançamento existente
+- Exclusão de lançamento inexistente
+- Listagem de lançamentos do usuário
+
+---
