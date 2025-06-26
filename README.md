@@ -219,7 +219,8 @@ src/
 │   ├── centroDeCustoController.js
 │   ├── receitaController.js
 │   ├── contaBancariaController.js
-│   └── lancamentoController.js
+│   ├── lancamentoController.js
+│   └── usuarioController.js
 ├── middlewares/
 │   └── auth.js         # Middleware de autenticação
 ├── models/
@@ -235,6 +236,7 @@ src/
 │   ├── receita.js
 │   ├── contaBancaria.js
 │   ├── lancamento.js
+│   ├── usuario.js
 │   └── index.js        # Rotas principais
 └── index.js            # Arquivo principal
 ```
