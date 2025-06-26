@@ -4,18 +4,19 @@ const app = require('../src/index');
 describe('Usuário - Fluxo Principal', () => {
   let token;
   let userId;
+  const timestamp = Date.now();
   const usuario = {
     nome: 'Teste Usuário',
-    email: 'testeuser@example.com',
+    email: `testeuser${timestamp}@example.com`,
     senha: 'senha123',
     telefone: '11999999999',
-    documento: '12345678909',
+    documento: '22255588846',
     dataNascimento: '1990-01-01'
   };
 
   it('deve cadastrar um usuário com sucesso', async () => {
     const res = await request(app)
-      .post('/usuario')
+      .post('/usuarios')
       .send(usuario);
     expect(res.statusCode).toBe(201);
     expect(res.body.success).toBe(true);
@@ -24,7 +25,7 @@ describe('Usuário - Fluxo Principal', () => {
 
   it('não deve cadastrar usuário com email já existente', async () => {
     const res = await request(app)
-      .post('/usuario')
+      .post('/usuarios')
       .send(usuario);
     expect(res.statusCode).toBe(400);
     expect(res.body.success).toBe(false);
@@ -42,7 +43,7 @@ describe('Usuário - Fluxo Principal', () => {
 
   it('deve alterar a senha do usuário', async () => {
     const res = await request(app)
-      .put(`/usuario/${userId}/alterar-senha`)
+      .post(`/usuarios/${userId}/alterar-senha`)
       .set('Authorization', `Bearer ${token}`)
       .send({ senhaAtual: usuario.senha, novaSenha: 'novaSenha123' });
     expect(res.statusCode).toBe(200);

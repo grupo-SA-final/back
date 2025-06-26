@@ -5,12 +5,12 @@ describe('Centro de Custo - Fluxo Principal', () => {
   let token;
   let centroId;
   beforeAll(async () => {
-    await request(app).post('/usuario').send({
+    await request(app).post('/usuarios').send({
       nome: 'Centro Teste',
       email: 'centro@teste.com',
       senha: 'senha123',
       telefone: '11999999999',
-      documento: '12345678902',
+      documento: '22255588846',
       dataNascimento: '1990-01-01'
     });
     const res = await request(app).post('/auth/login').send({
@@ -21,7 +21,7 @@ describe('Centro de Custo - Fluxo Principal', () => {
 
   it('deve cadastrar um centro de custo', async () => {
     const res = await request(app)
-      .post('/centro-de-custo')
+      .post('/centros-de-custo')
       .set('Authorization', `Bearer ${token}`)
       .send({ nome: 'Centro Teste', descricao: 'Centro de teste' });
     expect(res.statusCode).toBe(201);
@@ -31,7 +31,7 @@ describe('Centro de Custo - Fluxo Principal', () => {
 
   it('deve listar centros de custo', async () => {
     const res = await request(app)
-      .get('/centro-de-custo')
+      .get('/centros-de-custo')
       .set('Authorization', `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
@@ -40,7 +40,7 @@ describe('Centro de Custo - Fluxo Principal', () => {
 
   it('deve excluir um centro de custo', async () => {
     const res = await request(app)
-      .delete(`/centro-de-custo/${centroId}`)
+      .delete(`/centros-de-custo/${centroId}`)
       .set('Authorization', `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);

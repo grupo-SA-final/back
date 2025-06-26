@@ -5,12 +5,12 @@ describe('Receita - Fluxo Principal', () => {
   let token;
   let receitaId;
   beforeAll(async () => {
-    await request(app).post('/usuario').send({
+    await request(app).post('/usuarios').send({
       nome: 'Receita Teste',
       email: 'receita@teste.com',
       senha: 'senha123',
       telefone: '11999999999',
-      documento: '12345678903',
+      documento: '33366699957',
       dataNascimento: '1990-01-01'
     });
     const res = await request(app).post('/auth/login').send({
@@ -21,7 +21,7 @@ describe('Receita - Fluxo Principal', () => {
 
   it('deve cadastrar uma receita', async () => {
     const res = await request(app)
-      .post('/receita')
+      .post('/receitas')
       .set('Authorization', `Bearer ${token}`)
       .send({ nome: 'Receita Teste', descricao: 'Receita de teste' });
     expect(res.statusCode).toBe(201);
@@ -31,7 +31,7 @@ describe('Receita - Fluxo Principal', () => {
 
   it('deve listar receitas', async () => {
     const res = await request(app)
-      .get('/receita')
+      .get('/receitas')
       .set('Authorization', `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
@@ -40,7 +40,7 @@ describe('Receita - Fluxo Principal', () => {
 
   it('deve excluir uma receita', async () => {
     const res = await request(app)
-      .delete(`/receita/${receitaId}`)
+      .delete(`/receitas/${receitaId}`)
       .set('Authorization', `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);

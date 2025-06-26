@@ -5,8 +5,6 @@ const authMiddleware = require('../middlewares/auth');
 
 const router = express.Router();
 
-router.use(authMiddleware);
-
 function isCPF(value) {
   value = value.replace(/[^0-9]/g, '');
   if (value.length !== 11 || /^([0-9])\1+$/.test(value)) return false;
@@ -72,9 +70,14 @@ const senhaValidation = [
   body('novaSenha').isLength({ min: 6 }).withMessage('Nova senha deve ter pelo menos 6 caracteres')
 ];
 
+// Cadastro de usuário SEM autenticação
+router.post('/', usuarioValidation, usuarioController.post);
+
+// As demais rotas exigem autenticação
+router.use(authMiddleware);
+
 router.get('/', usuarioController.get);
 router.get('/:id', usuarioController.search);
-router.post('/', usuarioValidation, usuarioController.post);
 router.put('/:id', usuarioUpdateValidation, usuarioController.put);
 router.delete('/:id', usuarioController.delete);
 router.post('/:id/alterar-senha', senhaValidation, usuarioController.alterarSenha);

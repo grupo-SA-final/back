@@ -4,27 +4,27 @@ const app = require('../src/index');
 describe('Conta Bancária - Fluxo Principal', () => {
   let token;
   let contaId;
+  const timestamp = Date.now();
   beforeAll(async () => {
-    // Cria usuário e autentica
-    await request(app).post('/usuario').send({
+    await request(app).post('/usuarios').send({
       nome: 'Conta Teste',
-      email: 'conta@teste.com',
+      email: `conta${timestamp}@teste.com`,
       senha: 'senha123',
       telefone: '11999999999',
-      documento: '12345678901',
+      documento: '11144477735',
       dataNascimento: '1990-01-01'
     });
     const res = await request(app).post('/auth/login').send({
-      email: 'conta@teste.com', senha: 'senha123'
+      email: `conta${timestamp}@teste.com`, senha: 'senha123'
     });
     token = res.body.token;
   });
 
   it('deve cadastrar uma conta bancária', async () => {
     const res = await request(app)
-      .post('/conta-bancaria')
+      .post('/contas-bancarias')
       .set('Authorization', `Bearer ${token}`)
-      .send({
+      .send({ 
         nomeBanco: 'Banco Teste',
         tipoConta: 'corrente',
         agencia: '0001',
@@ -39,7 +39,7 @@ describe('Conta Bancária - Fluxo Principal', () => {
 
   it('deve listar contas bancárias', async () => {
     const res = await request(app)
-      .get('/conta-bancaria')
+      .get('/contas-bancarias')
       .set('Authorization', `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
@@ -48,7 +48,7 @@ describe('Conta Bancária - Fluxo Principal', () => {
 
   it('deve excluir uma conta bancária', async () => {
     const res = await request(app)
-      .delete(`/conta-bancaria/${contaId}`)
+      .delete(`/contas-bancarias/${contaId}`)
       .set('Authorization', `Bearer ${token}`);
     expect(res.statusCode).toBe(200);
     expect(res.body.success).toBe(true);
