@@ -15,10 +15,10 @@ const receitaValidation = [
     .optional().isLength({ max: 255 }).withMessage('Descrição deve ter no máximo 255 caracteres')
 ];
 
-router.get('/', receitaController.index);
-router.get('/:id', receitaController.show);
-router.post('/', receitaValidation, receitaController.store);
-router.put('/:id', receitaValidation, receitaController.update);
-router.delete('/:id', receitaController.destroy);
+router.get('/', receitaController.get);
+router.get('/:id', receitaController.search);
+router.post('/', receitaValidation, receitaController.post);
+router.put('/:id', receitaValidation, receitaController.put);
+router.delete('/:id', receitaController.delete);
 
 module.exports = router; 

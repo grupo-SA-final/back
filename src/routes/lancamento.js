@@ -32,10 +32,10 @@ const lancamentoValidation = [
     .isInt({ min: 1 }).withMessage('ID do centro de custo deve ser um número inteiro positivo')
 ];
 
-router.get('/', lancamentoController.index);
-router.get('/:id', lancamentoController.show);
-router.post('/', lancamentoValidation, lancamentoController.store);
-router.put('/:id', lancamentoValidation, lancamentoController.update);
-router.delete('/:id', lancamentoController.destroy);
+router.get('/', lancamentoController.get);
+router.get('/:id', lancamentoController.search);
+router.post('/', lancamentoValidation, lancamentoController.post);
+router.put('/:id', lancamentoValidation, lancamentoController.put);
+router.delete('/:id', lancamentoController.delete);
 
 module.exports = router; 

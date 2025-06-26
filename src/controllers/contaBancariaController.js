@@ -2,7 +2,7 @@ const { ContaBancaria } = require('../models');
 const { validationResult } = require('express-validator');
 
 const contaBancariaController = {
-  async index(req, res) {
+  async get(req, res) {
     try {
       const contasBancarias = await ContaBancaria.findAll({ where: { usuarioId: req.user.id } });
       res.json({ success: true, data: contasBancarias });
@@ -11,7 +11,7 @@ const contaBancariaController = {
     }
   },
 
-  async show(req, res) {
+  async search(req, res) {
     try {
       const { id } = req.params;
       const contaBancaria = await ContaBancaria.findOne({ where: { id, usuarioId: req.user.id } });
@@ -24,7 +24,7 @@ const contaBancariaController = {
     }
   },
 
-  async store(req, res) {
+  async post(req, res) {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -38,7 +38,7 @@ const contaBancariaController = {
     }
   },
 
-  async update(req, res) {
+  async put(req, res) {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -57,7 +57,7 @@ const contaBancariaController = {
     }
   },
 
-  async destroy(req, res) {
+  async delete(req, res) {
     try {
       const { id } = req.params;
       const contaBancaria = await ContaBancaria.findOne({ where: { id, usuarioId: req.user.id } });

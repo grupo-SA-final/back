@@ -19,16 +19,16 @@ function validarCPF(cpf) {
 }
 
 const usuarioController = {
-  async index(req, res) {
+  async get(req, res) {
     const usuarios = await Usuario.findAll({ attributes: { exclude: ['senha'] } });
     res.json({ success: true, data: usuarios });
   },
-  async show(req, res) {
+  async search(req, res) {
     const usuario = await Usuario.findByPk(req.params.id, { attributes: { exclude: ['senha'] } });
     if (!usuario) return res.status(404).json({ success: false, message: 'Usuário não encontrado' });
     res.json({ success: true, data: usuario });
   },
-  async store(req, res) {
+  async post(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ success: false, errors: errors.array() });
     const { nome, email, senha, telefone, documento, dataNascimento } = req.body;
@@ -40,7 +40,7 @@ const usuarioController = {
       res.status(400).json({ success: false, message: err.message });
     }
   },
-  async update(req, res) {
+  async put(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ success: false, errors: errors.array() });
     const { id } = req.params;
@@ -54,7 +54,7 @@ const usuarioController = {
       res.status(400).json({ success: false, message: err.message });
     }
   },
-  async destroy(req, res) {
+  async delete(req, res) {
     const { id } = req.params;
     try {
       const usuario = await Usuario.findByPk(id);

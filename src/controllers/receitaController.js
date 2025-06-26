@@ -2,7 +2,7 @@ const { Receita } = require('../models');
 const { validationResult } = require('express-validator');
 
 const receitaController = {
-  async index(req, res) {
+  async get(req, res) {
     try {
       const receitas = await Receita.findAll({ where: { usuarioId: req.user.id } });
       res.json({ success: true, data: receitas });
@@ -11,7 +11,7 @@ const receitaController = {
     }
   },
 
-  async show(req, res) {
+  async search(req, res) {
     try {
       const { id } = req.params;
       const receita = await Receita.findOne({ where: { id, usuarioId: req.user.id } });
@@ -24,7 +24,7 @@ const receitaController = {
     }
   },
 
-  async store(req, res) {
+  async post(req, res) {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -38,7 +38,7 @@ const receitaController = {
     }
   },
 
-  async update(req, res) {
+  async put(req, res) {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -57,7 +57,7 @@ const receitaController = {
     }
   },
 
-  async destroy(req, res) {
+  async delete(req, res) {
     try {
       const { id } = req.params;
       const receita = await Receita.findOne({ where: { id, usuarioId: req.user.id } });

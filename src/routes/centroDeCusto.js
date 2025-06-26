@@ -15,10 +15,10 @@ const centroDeCustoValidation = [
     .optional().isLength({ max: 255 }).withMessage('Descrição deve ter no máximo 255 caracteres')
 ];
 
-router.get('/', centroDeCustoController.index);
-router.get('/:id', centroDeCustoController.show);
-router.post('/', centroDeCustoValidation, centroDeCustoController.store);
-router.put('/:id', centroDeCustoValidation, centroDeCustoController.update);
-router.delete('/:id', centroDeCustoController.destroy);
+router.get('/', centroDeCustoController.get);
+router.get('/:id', centroDeCustoController.search);
+router.post('/', centroDeCustoValidation, centroDeCustoController.post);
+router.put('/:id', centroDeCustoValidation, centroDeCustoController.put);
+router.delete('/:id', centroDeCustoController.delete);
 
 module.exports = router; 

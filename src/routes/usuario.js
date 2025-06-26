@@ -72,11 +72,11 @@ const senhaValidation = [
   body('novaSenha').isLength({ min: 6 }).withMessage('Nova senha deve ter pelo menos 6 caracteres')
 ];
 
-router.get('/', usuarioController.index);
-router.get('/:id', usuarioController.show);
-router.post('/', usuarioValidation, usuarioController.store);
-router.put('/:id', usuarioUpdateValidation, usuarioController.update);
-router.delete('/:id', usuarioController.destroy);
+router.get('/', usuarioController.get);
+router.get('/:id', usuarioController.search);
+router.post('/', usuarioValidation, usuarioController.post);
+router.put('/:id', usuarioUpdateValidation, usuarioController.put);
+router.delete('/:id', usuarioController.delete);
 router.post('/:id/alterar-senha', senhaValidation, usuarioController.alterarSenha);
 
 module.exports = router; 

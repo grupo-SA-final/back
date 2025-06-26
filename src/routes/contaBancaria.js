@@ -25,10 +25,10 @@ const contaBancariaValidation = [
     .optional().isLength({ max: 255 }).withMessage('Descrição deve ter no máximo 255 caracteres')
 ];
 
-router.get('/', contaBancariaController.index);
-router.get('/:id', contaBancariaController.show);
-router.post('/', contaBancariaValidation, contaBancariaController.store);
-router.put('/:id', contaBancariaValidation, contaBancariaController.update);
-router.delete('/:id', contaBancariaController.destroy);
+router.get('/', contaBancariaController.get);
+router.get('/:id', contaBancariaController.search);
+router.post('/', contaBancariaValidation, contaBancariaController.post);
+router.put('/:id', contaBancariaValidation, contaBancariaController.put);
+router.delete('/:id', contaBancariaController.delete);
 
 module.exports = router; 
