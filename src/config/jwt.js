@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'sua_chave_secreta_muito_segura_2024';
+const JWT_SECRET = 'JNFQ*ASDJN1qd8w1bn7isdg1OND81iN8';
 const JWT_EXPIRES_IN = '24h';
 
 const generateToken = (payload) => {
