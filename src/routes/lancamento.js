@@ -15,7 +15,6 @@ const lancamentoValidation = [
     .custom((value) => {
       const data = new Date(value);
       const hoje = new Date();
-      if (data > hoje) throw new Error('Data não pode ser no futuro');
       return true;
     }),
   body('valor')

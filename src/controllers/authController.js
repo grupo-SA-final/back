@@ -54,6 +54,18 @@ const authController = {
         token
       });
     } catch (error) {
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        let message = 'Já existe um usuário cadastrado com este dado.';
+        if (error.errors && error.errors[0].path === 'documento') {
+          message = 'Já existe um usuário cadastrado com este documento (CPF).';
+        } else if (error.errors && error.errors[0].path === 'email') {
+          message = 'Já existe um usuário cadastrado com este email.';
+        }
+        return res.status(400).json({
+          success: false,
+          message
+        });
+      }
       console.error('Erro no registro:', error);
       res.status(500).json({ 
         success: false, 

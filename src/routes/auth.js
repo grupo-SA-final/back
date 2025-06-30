@@ -36,12 +36,6 @@ const registerValidation = [
     .custom(isCPF).withMessage('CPF inválido'),
   body('dataNascimento')
     .isDate().withMessage('Data de nascimento inválida')
-    .custom((value) => {
-      const data = new Date(value);
-      const hoje = new Date();
-      if (data > hoje) throw new Error('Data de nascimento não pode ser no futuro');
-      return true;
-    })
 ];
 
 const loginValidation = [

@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Rotas
-app.use('/', routes);
+app.use('/api', routes);
 
 // Middleware de tratamento de erros
 app.use((err, req, res, next) => {
@@ -29,6 +29,10 @@ app.use('*', (req, res) => {
     success: false,
     message: 'Rota não encontrada'
   });
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
 
 module.exports = app;
