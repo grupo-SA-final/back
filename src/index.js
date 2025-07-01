@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./config/database');
+const models = require('./models'); // Importa os models para registrar as tabelas
 const routes = require('./routes');
 
 const app = express();
