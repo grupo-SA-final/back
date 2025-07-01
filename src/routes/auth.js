@@ -27,7 +27,9 @@ const registerValidation = [
   body('email')
     .isEmail().withMessage('Email inválido'),
   body('senha')
-    .isLength({ min: 6 }).withMessage('Senha deve ter pelo menos 6 caracteres'),
+    .isLength({ min: 6 }).withMessage('Senha deve ter pelo menos 6 caracteres')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).+$/)
+    .withMessage('A senha deve conter pelo menos uma letra maiúscula, uma minúscula e um caractere especial'),
   body('telefone')
     .notEmpty().withMessage('Telefone é obrigatório')
     .matches(/^\d{10,11}$/).withMessage('Telefone deve ter 10 ou 11 dígitos numéricos'),
@@ -36,6 +38,20 @@ const registerValidation = [
     .custom(isCPF).withMessage('CPF inválido'),
   body('dataNascimento')
     .isDate().withMessage('Data de nascimento inválida')
+    .custom((value) => {
+      const data = new Date(value);
+      const hoje = new Date();
+      if (data > hoje) throw new Error('Data de nascimento não pode ser no futuro');
+      // Verifica se tem pelo menos 18 anos
+      const idade = hoje.getFullYear() - data.getFullYear();
+      const m = hoje.getMonth() - data.getMonth();
+      if (m < 0 || (m === 0 && hoje.getDate() < data.getDate())) {
+        if (idade - 1 < 18) throw new Error('Usuário deve ter pelo menos 18 anos');
+      } else {
+        if (idade < 18) throw new Error('Usuário deve ter pelo menos 18 anos');
+      }
+      return true;
+    })
 ];
 
 const loginValidation = [
